@@ -3,7 +3,7 @@ from os import path, listdir, makedirs, environ
 import cv2
 
 script_dir = path.dirname(path.abspath(__file__))
-environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir,"../quixotic-tesla-429014-k0-3e137035af61.json")
+environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir,"path_to_your_json_key")
 client = vision.ImageAnnotatorClient()
 
 images_folder = path.join(script_dir,"../images_ecran")
