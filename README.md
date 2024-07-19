@@ -71,6 +71,7 @@ By initializing them first, their features are analyzed first by the algorithm. 
 You must run the confirm_thermo_state/main.py script with a 1920x1080 pixel picture to identify the menu of the thermo-cycler. The robot must be in this position:
 ![image](https://github.com/user-attachments/assets/645b351a-767d-47ef-bbf6-f77b518eec99)
 
+You must build your own json authentification key with Google OCR to use the algorithm and paste it in your cloned repo. 
 
 
 
