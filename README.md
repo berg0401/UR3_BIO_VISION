@@ -32,7 +32,7 @@ The complete pipeline is located in the petry_height_evaluator directory:
 
 ## Second Mandate : Monitor Thermo-Cycler State
 The robot presses on the Thermo-Cycler's touch screen with a custom pen to interact with it. To confirm that the contact has been made and that the thermo-cycler is in the right state, the robot's camera captures an image of the screen like so : 
-![01_Color](https://github.com/user-attachments/assets/13a4cab5-f91e-4eba-823d-88209714cdc3)
+![18_Color](https://github.com/user-attachments/assets/948b85c2-63f7-411d-8958-28924dbecbc4)
 
 There are 8 screen states that are relevent for the robot protocols. 3 "pop ups" and 5 "menus". The "pop ups" can technicaly pop from any menu. 
 "Pop ups" : 
