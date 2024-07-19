@@ -30,32 +30,48 @@ Using the agar's height in pixels, along with the camera's focal length, pixel s
 The complete pipeline is located in the petry_height_evaluator directory:
 ![image](https://github.com/user-attachments/assets/0514e946-ee79-4963-a3ab-62319d3ac08c)
 
+For ideal results with the virtual aperture, it is recommended to take a 1280x720 pixel picture. If you change the picture's resolution, change the crop and the virtual aperture values accordingly. They are now ideal with a 1280x720 pixel image.
+
+You must put the robot's joints in this configuration to have the right agar relative position to the camera and apply the theorem of similar triangles: 
+![image](https://github.com/user-attachments/assets/df5eec7c-8405-4cfc-a026-937516794b50)
+
+
 ## Second Mandate : Monitor Thermo-Cycler State
-The robot presses on the Thermo-Cycler's touch screen with a custom pen to interact with it. To confirm that the contact has been made and that the thermo-cycler is in the right state, the robot's camera captures an image of the screen like so : 
+The robot presses on the Thermo-Cycler's touch screen with a custom pen to interact with it. To confirm that the contact has been made and that the thermo-cycler is in the right state, the robot's camera captures an image of the screen like this:
 ![18_Color](https://github.com/user-attachments/assets/948b85c2-63f7-411d-8958-28924dbecbc4)
 
-There are 8 screen states that are relevent for the robot protocols. 3 "pop ups" and 5 "menus". The "pop ups" can technicaly pop from any menu. 
-"Pop ups" : 
+There are 8 screen states that are relevant for the robot protocols: 3 "pop ups" and 5 menus. The "pop ups" can technically appear from any menu.
+"Pop ups": 
 ![09_Color](https://github.com/user-attachments/assets/366c30f4-5b91-4582-8e5a-02e54562b334)
 
-"Menus" :
+Menus:
 ![01_Color](https://github.com/user-attachments/assets/c8bd3f15-a46f-4c48-a352-b1033764b88d)
 
-To recongnize different "pop ups" and "menus" of the thermo-cycler, we use google's OCR as an API. It reads the different labels on the screen. In the code, some labels are called "features". To be considered a menu's feature, it needs to be exclusif to this menu and allow the algorithm to guess the menu by its presence only. The feature is defined by the word it spells and it's location on the screen. 
+To recognize different "pop ups" and menus of the thermo-cycler, we use Google's OCR as an API. It reads the different labels on the screen. In the code, some labels are called "features." To be considered a menu's feature, it needs to be exclusive to this menu and allow the algorithm to identify the menu by its presence alone. The feature is defined by the word it spells and its location on the screen.
 
-In the previous images, you can see white spots. Theses are caused by the light bulbs of the room. Because of them, each "menu" and "pop ups" needs features at multiple locations on the screen to ensure that the state is recongnized even if a white spot covers a feature. On this picture, the features of the "Saved Protocols" menu are circled in red : 
+In the previous images, you can see white spots. These are caused by the room's light bulbs. Because of them, each menu and "pop up" needs features at multiple locations on the screen to ensure that the state is recognized even if a white spot covers a feature. In this picture, the features of the "Saved Protocols" menu are circled in red:
 ![image](https://github.com/user-attachments/assets/48b01e2b-5d79-4481-9da8-b6bb319755b8)
 
-The light bulb's effect on the image is reduced by adjusting the camera's settings like so (exposure and gain very low) : 
+The light bulb's effect on the image is reduced by adjusting the camera's settings like this (exposure and gain very low):
 ![image](https://github.com/user-attachments/assets/4ddd4864-b02d-4b05-a432-ca2a3b8c3a31)
 
-To process the image, the algorithm follows theses steps : 
+To process the image, the algorithm follows these steps:
 1. Crops the image.
 2. Detects and reads labels.
-3. Compares the labels to the feature of each sceen.
-4. Returns the menu that owns a feature that matches with a label's word and location. 
+3. Compares the labels to the features of each screen.
+4. Determines the menu that owns a feature matching a label's word and location.
 
-The pipeline is in the "confirm_thermo_state" folder : 
+The confirm_thermo_state/thermo_state_initializer.py file contains the ThermoStateInitializer class. This class initializes each menu and their features for comparison with the labels read by the camera. It's important to initialize the "pop ups" before the menus because some of them don't occupy the entire screen. You can still see menu features while a "pop up" is displayed. For example, the "Confirm Protocol" "pop up" on the "Saved Protocols" menu allows for recognition of exclusive menu features:
+![07_Color](https://github.com/user-attachments/assets/36ec808c-873d-4dd8-9165-61e3df494490)
+
+By initializing them first, their features are analyzed first by the algorithm. If no labels match the features of the "pop up," we can conclude that it is indeed a menu. It's therefore mandatory to maintain this order when initializing the menus:
+![image](https://github.com/user-attachments/assets/757981f3-bd53-4488-9af7-ee3ecd901138)
+
+You must run the confirm_thermo_state/main.py script with a 1920x1080 pixel picture to identify the menu of the thermo-cycler. The robot must be in this position:
+![image](https://github.com/user-attachments/assets/645b351a-767d-47ef-bbf6-f77b518eec99)
+
+
+
 
 
 
