@@ -32,7 +32,8 @@ The complete pipeline is located in the petry_height_evaluator directory:
 
 For ideal results with the virtual aperture, it is recommended to take a 1280x720 pixel picture. If you change the picture's resolution, change the crop and the virtual aperture values accordingly. They are now ideal with a 1280x720 pixel image.
 
-You must put the robot's joints in this configuration to have the right agar relative position to the camera and apply the theorem of similar triangles: 
+You must put the robot's joints in this configuration to have the right agar relative position to the camera and apply the theorem of similar triangles:
+
 ![image](https://github.com/user-attachments/assets/df5eec7c-8405-4cfc-a026-937516794b50)
 
 
