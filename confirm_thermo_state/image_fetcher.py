@@ -1,5 +1,6 @@
 from os import path, listdir
 from cv2 import imread, imencode
+
 class ImageFetcher:
     def __init__(self,images_folder):
         self.images_folder = images_folder

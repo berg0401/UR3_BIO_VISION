@@ -57,11 +57,11 @@ class ThermoStateInitializer:
 
     def init_running_protocol_menu(self):
         running_protocol_menu = ThermoState('Running Protocol Menu')
+        running_protocol_menu.add_feature(word="Status", location=Location(left_top_corner=(309,568),right_bottom_corner=(378,600)))
         running_protocol_menu.add_feature(word="Pause", location=Location(left_top_corner=(312,123),right_bottom_corner=(371,154)))
         running_protocol_menu.add_feature(word="Skip", location=Location(left_top_corner=(209,121),right_bottom_corner=(257,153)))
         running_protocol_menu.add_feature(word="Step", location=Location(left_top_corner=(178,121),right_bottom_corner=(226,153)))
         running_protocol_menu.add_feature(word="Cancel", location=Location(left_top_corner=(57,121),right_bottom_corner=(125,152)))
-        running_protocol_menu.add_feature(word="Status", location=Location(left_top_corner=(309,568),right_bottom_corner=(378,600)))
         self.thermo_states.append(running_protocol_menu)
 
     def init_protocol_done_menu(self):
@@ -93,7 +93,14 @@ class ThermoStateInitializer:
 
     def init_keyboard_pop(self):
         keyboard_pop = ThermoState('Keyboard Pop Up')
-        keyboard_pop.add_feature(word="OK", location=Location(left_top_corner=(383,170),right_bottom_corner=(428,203)))
-        keyboard_pop.add_feature(word="Cancel", location=Location(left_top_corner=(241,169),right_bottom_corner=(316,202)))
-        # Title of the block
+        keyboard_pop.add_feature(word="Sample", location=Location(left_top_corner=(405,532),right_bottom_corner=(481,569)))
+        keyboard_pop.add_feature(word="volume", location=Location(left_top_corner=(344,532),right_bottom_corner=(420,568)))
+        keyboard_pop.add_feature(word="Lid", location=Location(left_top_corner=(437,532),right_bottom_corner=(481,568)))
+        keyboard_pop.add_feature(word="temperature", location=Location(left_top_corner=(341,532),right_bottom_corner=(454,567)))
+        keyboard_pop.add_feature(word="Hold", location=Location(left_top_corner=(424,532),right_bottom_corner=(480,569)))
+        keyboard_pop.add_feature(word="time", location=Location(left_top_corner=(388,532),right_bottom_corner=(441,569)))
+        keyboard_pop.add_feature(word="Block", location=Location(left_top_corner=(416,532),right_bottom_corner=(480,569)))
+        keyboard_pop.add_feature(word="temperature", location=Location(left_top_corner=(319,532),right_bottom_corner=(432,569)))
+        keyboard_pop.add_feature(word="OK", location=Location(left_top_corner=(383, 170), right_bottom_corner=(428, 203)))
+        keyboard_pop.add_feature(word="Cancel", location=Location(left_top_corner=(241, 169), right_bottom_corner=(316, 202)))
         self.thermo_states.append(keyboard_pop)
