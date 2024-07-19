@@ -20,7 +20,7 @@ By knowing the agar's height in pixels, the focal length of the camera, the size
 ![image](https://github.com/user-attachments/assets/22b88195-fff4-4a59-b597-e97047ba1254)
 
 The pipeline is in the petry_height_evaluator directory. 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/0514e946-ee79-4963-a3ab-62319d3ac08c)
 
 
 
