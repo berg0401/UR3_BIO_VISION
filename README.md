@@ -17,7 +17,8 @@ We than use the find contours function to detect rectangles and we get it's heig
 ![1](https://github.com/user-attachments/assets/98ea9e5f-c3cf-415e-9150-2b81e63f4e4e)
 
 By knowing the agar's height in pixels, the focal length of the camera, the size of a pixel on the sensor and the distance of the petri pot from the camera, we can use the theorem of similar triangles to find the height of the agar in millimeters. 
-![image](https://github.com/user-attachments/assets/22b88195-fff4-4a59-b597-e97047ba1254)
+![image](https://github.com/user-attachments/assets/a32d2000-4d1f-4632-879e-24bdc8946d52)
+
 
 The pipeline is in the petry_height_evaluator directory. 
 ![image](https://github.com/user-attachments/assets/0514e946-ee79-4963-a3ab-62319d3ac08c)
