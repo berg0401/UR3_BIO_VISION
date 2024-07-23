@@ -9,7 +9,7 @@ class TextReader:
     def __init__(self):
         #connect to API with json key
         script_dir = path.dirname(path.abspath(__file__))
-        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../quixotic-tesla-429014-k0-3e137035af61.json")
+        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../path_to_your_json_key")
         self.client = vision.ImageAnnotatorClient()
         thermo_state_initializer = ThermoStateInitializer()
         self.thermo_states = thermo_state_initializer.init_state_options()
@@ -55,8 +55,6 @@ if __name__ == '__main__':
     text_reader = TextReader()
     for content in images_content:
         texts = text_reader.read(content)
-        for text in texts:
-            break
         state_menu = text_reader.guess_menu(texts)
         text_reader.show_result(state_menu)
         text_reader.show_image(content)
