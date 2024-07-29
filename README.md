@@ -41,7 +41,7 @@ You must put the robot's joints in this configuration to have the right agar rel
 The robot presses on the Thermo-Cycler's touch screen with a custom pen to interact with it. To confirm that the contact has been made and that the thermo-cycler is in the right state, the robot's camera captures an image of the screen like this:
 ![18_Color](https://github.com/user-attachments/assets/948b85c2-63f7-411d-8958-28924dbecbc4)
 
-There are 8 screen states that are relevant for the robot protocols: 3 "pop ups" and 5 menus. The "pop ups" can technically appear from any menu.
+There are 23 screen states that are relevant for the robot protocols: 10 "pop ups" and 13 menus. The "pop ups" can technically appear from any menu.
 "Pop ups": 
 ![09_Color](https://github.com/user-attachments/assets/366c30f4-5b91-4582-8e5a-02e54562b334)
 
