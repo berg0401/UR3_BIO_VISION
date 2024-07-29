@@ -9,7 +9,7 @@ class AnswerCreater:
     def __init__(self):
         #connect to API with json key
         script_dir = path.dirname(path.abspath(__file__))
-        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../quixotic-tesla-429014-k0-b26b43f8ede2.json")
+        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../path_to_your_key")
         self.client = vision.ImageAnnotatorClient()
         thermo_state_initializer = ThermoStateInitializer()
         self.thermo_states = thermo_state_initializer.init_state_options()
