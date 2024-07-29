@@ -3,9 +3,9 @@ from os import path, listdir, makedirs, environ
 import cv2
 
 script_dir = path.dirname(path.abspath(__file__))
-environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir,"../quixotic-tesla-429014-k0-3e137035af61.json")
+environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir,"../quixotic-tesla-429014-k0-b26b43f8ede2.json")
 client = vision.ImageAnnotatorClient()
-images_folder = path.join(script_dir,"../images_ecran")
+images_folder = path.join(script_dir,"../image_ecran_test_unitaire")
 
 images_name = [f for f in listdir(images_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp'))]
 for image_name in images_name:
@@ -19,8 +19,8 @@ for image_name in images_name:
     print("Text:\n")
 
     for text in texts:
-        print(text.description)
-        break
+        print(text)
+
     image_shown = cv2.imread(img_path)
     cv2.imshow('original', image_shown)
     cv2.waitKey(0)

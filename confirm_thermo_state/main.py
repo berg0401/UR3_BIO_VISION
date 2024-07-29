@@ -3,7 +3,7 @@ from text_reader import TextReader
 from os import path
 
 script_dir = path.dirname(path.abspath(__file__))
-images_folder = path.join(script_dir,r"..\image_ecran_test_unitaire")
+images_folder = path.join(script_dir,r"..\images_ecran")
 #INIT THE SERVER
 ImageFetcher = ImageFetcher(images_folder)
 text_reader = TextReader()

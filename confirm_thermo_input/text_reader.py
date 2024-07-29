@@ -9,7 +9,7 @@ class TextReader:
     def __init__(self):
         #connect to API with json key
         script_dir = path.dirname(path.abspath(__file__))
-        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../quixotic-tesla-429014-k0-b26b43f8ede2.json")
+        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../path_to_json_key")
         self.client = vision.ImageAnnotatorClient()
 
     def read(self,image_content):
@@ -27,9 +27,9 @@ class TextReader:
 
 if __name__ == '__main__':
     script_dir = path.dirname(path.abspath(__file__))
-    images_folder = path.join(script_dir,r"..\keyboard_images\spot\multiple_pics\1278")
-    ImageFetcher = ImageFetcherCombiner(images_folder)
-    images_content = ImageFetcher.fetch('spot')
+    images_folder = path.join(script_dir,r"..\keyboard_images\spot\multiple_pics\trigger_test")
+    ImageFetcher = ImageFetcher(images_folder)
+    images_content = ImageFetcher.fetch('spot_pen')
     text_reader = TextReader()
     for content in images_content:
         texts = text_reader.read(content)

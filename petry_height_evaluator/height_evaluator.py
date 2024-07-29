@@ -68,7 +68,7 @@ if __name__ == "__main__":
     filtered_images = hsv_filter.filter()
     rectangle_finder = FindRectangles(images, filtered_images)
     rectangles_size = rectangle_finder.find()
-    petri_position = [0.1,-0.1,3]
+    petri_position = [0, 0.0004, 0.0807071]
     app = HeightEvaluator(rectangle_finder.good_images,rectangles_size,petri_position)
     agar_thickness = app.get_metric_thickness()
-
+    print(agar_thickness)

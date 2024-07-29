@@ -101,4 +101,3 @@ if __name__ == "__main__":
     rectangles_size = app.find()
     app.show_images()
     app.save_images(images_folder)
-

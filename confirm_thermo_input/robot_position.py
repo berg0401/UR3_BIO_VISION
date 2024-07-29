@@ -11,5 +11,7 @@ class RobotPosition:
     def init_crop_dictionary(self):
         self.crop_measures = {
             'default': [820,851,710,345],
-            'spot' : [740,935,540,515]
+            'spot': [740,935,540,515],
+            'spot_pen': [785,930,570,485],
+            'default_pen': [860, 855, 600, 455]
         }
