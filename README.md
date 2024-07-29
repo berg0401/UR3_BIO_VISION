@@ -69,11 +69,15 @@ By initializing them first, their features are analyzed first by the algorithm. 
 ![image](https://github.com/user-attachments/assets/757981f3-bd53-4488-9af7-ee3ecd901138)
 
 You must run the confirm_thermo_state/main.py script with a 1920x1080 pixel picture to identify the menu of the thermo-cycler. The robot must be in this position:
-![image](https://github.com/user-attachments/assets/645b351a-767d-47ef-bbf6-f77b518eec99)
+![2eede12c-e630-4fb2-b05b-6d156681a3e5](https://github.com/user-attachments/assets/67d59a41-67d7-439d-969a-a02e02fc1d4b)
+The thermo cycler must be at this position : 
+![image](https://github.com/user-attachments/assets/5d7248ca-8cba-486c-9e7f-36fcaeae59ca)
+
+
 
 You must build your own json authentification key with Google OCR to use the algorithm and paste it in your cloned repo. 
 
-## Second Mandate : Confirm Thermo-Cycler's Input
+## Third Mandate : Confirm Thermo-Cycler's Input
 
 Sometimes, the thermo-cycler doesn’t detect the pen touching its screen. The robot must confirm that the correct button was pressed. To achieve this, a picture is taken of the area where the keyboard’s input is displayed. Using Google OCR’s API, we verify that the result matches the intended input.
 
