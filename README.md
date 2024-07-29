@@ -75,16 +75,18 @@ You must build your own json authentification key with Google OCR to use the alg
 
 ## Second Mandate : Confirm Thermo-Cycler's Input
 
-Sometimes, the thermo-cycler doesn't feel the pen touching it's screen. The robot must confirm that he really pressed the button required. To do so, a picture is taken of the area where the keyboard's input is displayed. With Google OCR's API, we confirm that the result is the same as what was intended. 
+Sometimes, the thermo-cycler doesn’t detect the pen touching its screen. The robot must confirm that the correct button was pressed. To achieve this, a picture is taken of the area where the keyboard’s input is displayed. Using Google OCR’s API, we verify that the result matches the intended input.
 
-Since the keyboard's input is always displayed at the same place on the screen, the algorithm can't gather features from all around the image to avoid the room's light bulbs on the screen. If the white spot is in the keyboard's display section like this : 
+Since the keyboard’s input is always displayed in the same area of the screen, the algorithm cannot gather features from all around the image, as it needs to avoid interference from the room’s light bulbs on the screen. If a white spot appears in the keyboard’s display section like this:
 ![01_Color](https://github.com/user-attachments/assets/b03116d7-88cb-4e52-824b-402c2822c033)
-It's impossible to confirm the input. 
-The solution is to adjsut the camera setting to eliminate the white spot from the screen : 
+it becomes impossible to confirm the input.
+
+The solution is to adjust the camera settings to eliminate the white spot from the screen:
 ![01_Color](https://github.com/user-attachments/assets/9fb7094a-e533-4fc5-b7c6-5f0484a28e9c)
 Settings : 
 ![ebec2a36-584b-4c1b-b439-eb04383a35c7](https://github.com/user-attachments/assets/890de580-0084-4ffd-befe-7aa78a72071d)
-Theses settings ruins the image quality. Three picutres are taken and superimpose to enhance image quality. Here's an example of the final result ("65:65:56"): 
+However, these settings degrade the image quality. To enhance the image quality, three pictures are taken and superimposed. Here’s an example of the final result ("65:65:56"):
+
 ![image](https://github.com/user-attachments/assets/62158f40-c8b1-4653-a164-0e85867b4641)
 
 
