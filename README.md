@@ -37,7 +37,7 @@ You must put the robot's joints in this configuration to have the right agar rel
 ![image](https://github.com/user-attachments/assets/df5eec7c-8405-4cfc-a026-937516794b50)
 
 
-## Second Mandate : Monitor Thermo-Cycler State
+## Second Mandate : Monitor Thermo-Cycler's State
 The robot presses on the Thermo-Cycler's touch screen with a custom pen to interact with it. To confirm that the contact has been made and that the thermo-cycler is in the right state, the robot's camera captures an image of the screen like this:
 ![18_Color](https://github.com/user-attachments/assets/948b85c2-63f7-411d-8958-28924dbecbc4)
 
@@ -73,6 +73,19 @@ You must run the confirm_thermo_state/main.py script with a 1920x1080 pixel pict
 
 You must build your own json authentification key with Google OCR to use the algorithm and paste it in your cloned repo. 
 
+## Second Mandate : Confirm Thermo-Cycler's Input
+
+Sometimes, the thermo-cycler doesn't feel the pen touching it's screen. The robot must confirm that he really pressed the button required. To do so, a picture is taken of the area where the keyboard's input is displayed. With Google OCR's API, we confirm that the result is the same as what was intended. 
+
+Since the keyboard's input is always displayed at the same place on the screen, the algorithm can't gather features from all around the image to avoid the room's light bulbs on the screen. If the white spot is in the keyboard's display section like this : 
+![01_Color](https://github.com/user-attachments/assets/b03116d7-88cb-4e52-824b-402c2822c033)
+It's impossible to confirm the input. 
+The solution is to adjsut the camera setting to eliminate the white spot from the screen : 
+![01_Color](https://github.com/user-attachments/assets/9fb7094a-e533-4fc5-b7c6-5f0484a28e9c)
+Settings : 
+![ebec2a36-584b-4c1b-b439-eb04383a35c7](https://github.com/user-attachments/assets/890de580-0084-4ffd-befe-7aa78a72071d)
+Theses settings ruins the image quality. Three picutres are taken and superimpose to enhance image quality. Here's an example of the final result ("65:65:56"): 
+![image](https://github.com/user-attachments/assets/62158f40-c8b1-4653-a164-0e85867b4641)
 
 
 
