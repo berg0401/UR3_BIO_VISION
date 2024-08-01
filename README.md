@@ -72,6 +72,7 @@ You must run the confirm_thermo_state/main.py script with a 1920x1080 pixel pict
 
 
 ![2eede12c-e630-4fb2-b05b-6d156681a3e5](https://github.com/user-attachments/assets/67d59a41-67d7-439d-969a-a02e02fc1d4b)
+
 The thermo cycler must be at this position : 
 
 
