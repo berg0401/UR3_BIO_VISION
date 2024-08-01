@@ -95,9 +95,9 @@ if __name__ == "__main__":
     left_right = 350
     cropper = CropAuto(images, top_bottom, left_right)
     cropped_images = cropper.crop()
-    hsv_filter = HSVFilter(cropped_images, 250)
+    hsv_filter = HSVFilter(cropped_images, 275)
     filtered_images = hsv_filter.filter()
     app = FindRectangles(images,filtered_images)
     rectangles_size = app.find()
     app.show_images()
-    app.save_images(images_folder)
+    #app.save_images(images_folder)

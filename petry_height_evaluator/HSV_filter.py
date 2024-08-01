@@ -85,7 +85,7 @@ if __name__ == "__main__":
     left_right = 350
     cropper = CropAuto(images, top_bottom, left_right)
     cropped_images = cropper.crop()
-    hsv_filter = HSVFilter(cropped_images,250)
+    hsv_filter = HSVFilter(cropped_images,275)
     filtered_images = hsv_filter.filter()
     hsv_filter.show_images()
-    hsv_filter.save_images(images_folder)
+    #hsv_filter.save_images(images_folder)

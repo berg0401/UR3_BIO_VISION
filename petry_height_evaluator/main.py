@@ -24,7 +24,7 @@ if __name__ == "__main__":
     left_right = 350
 
     #petri pot's position
-    petri_position = [0, 0.0004, 0.0807071]
+    petri_position = [0, 0.000360593, 0.0720975]
 
     #pipeline
     cropper = CropAuto(images, top_bottom, left_right)
