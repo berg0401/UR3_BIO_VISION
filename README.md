@@ -85,17 +85,39 @@ You must build your own json authentification key with Google OCR to use the alg
 
 Sometimes, the thermo-cycler doesn’t detect the pen touching its screen. The robot must confirm that the correct button was pressed. To achieve this, a picture is taken of the area where the keyboard’s input is displayed. Using Google OCR’s API, we verify that the result matches the intended input.
 
-Since the keyboard’s input is always displayed in the same area of the screen, the algorithm cannot gather features from all around the image, as it needs to avoid interference from the room’s light bulbs on the screen. If a white spot appears in the keyboard’s display section like this:
+Since the keyboard’s input is always displayed in the same area of the screen, the algorithm cannot gather features from all around the image, as it needs to avoid interference from the room’s light bulbs on the screen. If a white spot appears in the keyboard’s display section like this (worst case):
 ![01_Color](https://github.com/user-attachments/assets/b03116d7-88cb-4e52-824b-402c2822c033)
 it becomes impossible to confirm the input.
 
 The solution is to adjust the camera settings to eliminate the white spot from the screen:
 ![01_Color](https://github.com/user-attachments/assets/9fb7094a-e533-4fc5-b7c6-5f0484a28e9c)
-Settings : 
-![ebec2a36-584b-4c1b-b439-eb04383a35c7](https://github.com/user-attachments/assets/890de580-0084-4ffd-befe-7aa78a72071d)
-However, these settings degrade the image quality. To enhance the image quality, three pictures are taken and superimposed. Here’s an example of the final result ("65:65:56"):
+Settings :
 
-![image](https://github.com/user-attachments/assets/62158f40-c8b1-4653-a164-0e85867b4641)
+![ebec2a36-584b-4c1b-b439-eb04383a35c7](https://github.com/user-attachments/assets/890de580-0084-4ffd-befe-7aa78a72071d)
+
+However, these settings degrade the image quality. To enhance the image quality, three pictures are taken and superimposed. The result looks like this : 
+![image](https://github.com/user-attachments/assets/a4ec9c2e-b1b6-474f-9945-33b6462ff1d1)
+
+Google OCR API's sends a list called texts. The first element is all the words on the screen. The second element is the first word and the third is the second word. We take only the second element, which is the number without it's units. In the picture above, it would be "20". 
+
+To take a picture and read it's content, you must run /confirm_thermo_input/main.py. This code will take 3 pictures and adjsut the camera's settings with the RealsenseCamera object, crops and rotates the image with ImageEncoder, and read the text with textReader: 
+![image](https://github.com/user-attachments/assets/fb531de8-2c0a-4509-88d7-96fc588496d6)
+
+To have an accurate result, the robot must be placed at this position:
+![image](https://github.com/user-attachments/assets/572dc027-8cdc-442a-a800-3fd067dd5f9e)
+
+
+The thermocycler must be at this position: 
+![image](https://github.com/user-attachments/assets/5d7248ca-8cba-486c-9e7f-36fcaeae59ca)
+
+It's possible to read pre-captured image from the /input_thermo_demo_images directory. The confirm_thermo_input/text_reader.py's main function uses the imageFetcher object to get the images from the files, imageEncoder to crop and rotate the image and read the text with the textReader object: 
+![image](https://github.com/user-attachments/assets/10e5f8f5-91ad-4659-af7c-cecf9fdea66a)
+
+
+
+
+
+
 
 
 
