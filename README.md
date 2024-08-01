@@ -8,6 +8,57 @@ Monitor Thermo-cycler State: Verify the operational status of the thermo-cycler 
 
 Validate Thermo-cycler Inputs: Confirm that the robot has correctly entered the desired volume on the thermo-cycler's interface.
 
+## Set up environment
+Pyrealsense needs python 3.8 and lower. For this reason, a virtual environment is recomanded. 
+
+###  1. Create a Virtual Environment
+Open a terminal or command prompt.
+
+Navigate to your project directory (if applicable):
+
+```bash
+cd /path/to/your/project
+```
+
+Create a virtual environment:
+For Python 3:
+```bash
+python3 -m venv myenv
+```
+For Windows:
+```bash
+python -m venv myenv
+``` 
+### Activate the virtual environment:
+
+For macOS/Linux:
+```bash
+source myenv/bin/activate
+```
+For Windows:
+```bash
+myenv\Scripts\activate
+```
+Your command prompt should now show the virtual environment name, indicating that it is active.
+
+### 2. Install Required Packages
+Once the virtual environment is active, you can install the necessary packages.
+
+Install pyrealsense2:
+
+```bash
+pip install pyrealsense2
+```
+Install OpenCV:
+
+```bash
+pip install opencv-python
+```
+Install Google OCR API Client:
+
+```bash
+pip install google-cloud-vision
+```
 ## First Mandate : Measure the Agar
 Agar is a gelatinous substance housed in a petri dish. Its height is crucial for accurately placing a liquid drop on its surface. Penetration into the substance is limited to 1 mm, ensuring the liquid touches the surface due to insufficient gravitational force.
 
