@@ -111,6 +111,7 @@ To have an accurate result, the robot must be placed at this position:
 ![image](https://github.com/user-attachments/assets/572dc027-8cdc-442a-a800-3fd067dd5f9e)
 
 
+
 The thermocycler must be at this position: 
 
 
