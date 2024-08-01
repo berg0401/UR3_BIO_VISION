@@ -29,7 +29,7 @@ For Windows:
 ```bash
 python -m venv myenv
 ``` 
-### Activate the virtual environment:
+Activate the virtual environment:
 
 For macOS/Linux:
 ```bash
@@ -59,6 +59,29 @@ Install Google OCR API Client:
 ```bash
 pip install google-cloud-vision
 ```
+
+### 3. Create a JSON authentification key to have access to google OCR`s API
+- Go to : https://console.cloud.google.com/welcome/new?_ga=2.11696244.1593724727.1722536583-1103325473.1720621759&project=quixotic-tesla-429014-k0
+  ![image](https://github.com/user-attachments/assets/dbf8a95c-d06d-4311-ba28-d4a8656e3b97)
+- Select or create a project
+- Go to the IAM & Admin > Service Accounts.
+  ![image](https://github.com/user-attachments/assets/528f6a32-71a3-4028-b475-8427733929fa)
+  ![image](https://github.com/user-attachments/assets/ca95dd3a-39a5-48a5-abce-0660617a34f3)
+
+
+- Create a new service account or select an existing one.
+![image](https://github.com/user-attachments/assets/a9d24c80-0219-477c-b1e5-c7a96aa8a332)
+
+
+- Grant it the necessary roles (e.g., Vision API User).
+- Create and download a JSON key file for this service account.
+![image](https://github.com/user-attachments/assets/17a13e49-f575-481b-a5bf-d746fa282427)
+![image](https://github.com/user-attachments/assets/a16225a9-eeed-490a-b3af-88c2076540be)
+![image](https://github.com/user-attachments/assets/f05c6f86-cc02-4d04-9f09-67af1fe9cb29)
+
+This will download automatically the key. Paste it in your project's directory adjust the key's directory in /confirm_thermo_input/text_reader.py and /confirm_thermo_state/text_reader.py    
+
+  
 ## First Mandate : Measure the Agar
 Agar is a gelatinous substance housed in a petri dish. Its height is crucial for accurately placing a liquid drop on its surface. Penetration into the substance is limited to 1 mm, ensuring the liquid touches the surface due to insufficient gravitational force.
 
