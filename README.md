@@ -68,7 +68,11 @@ The confirm_thermo_state/thermo_state_initializer.py file contains the ThermoSta
 By initializing them first, their features are analyzed first by the algorithm. If no labels match the features of the "pop up," we can conclude that it is indeed a menu. It's therefore mandatory to maintain this order when initializing the menus:
 ![image](https://github.com/user-attachments/assets/757981f3-bd53-4488-9af7-ee3ecd901138)
 
-You must run the confirm_thermo_state/main.py script with a 1920x1080 pixel picture to identify the menu of the thermo-cycler. The robot must be in this position:
+To take a picture and read it's content, you must run /confirm_thermo_state/main.py. This code will take one picture and adjsut the camera's settings with the RealsenseCamera object, crop the image with ImageEncoder, and read the text with textReader: 
+
+![image](https://github.com/user-attachments/assets/bedcd068-4e7a-493a-95ff-0202dc023dcf)
+
+The robot must be in this position:
 
 
 ![2eede12c-e630-4fb2-b05b-6d156681a3e5](https://github.com/user-attachments/assets/67d59a41-67d7-439d-969a-a02e02fc1d4b)
@@ -77,6 +81,13 @@ The thermo cycler must be at this position :
 
 
 ![image](https://github.com/user-attachments/assets/5d7248ca-8cba-486c-9e7f-36fcaeae59ca)
+
+It's possible to read pre-captured image from the /state_menu_demo_images directory. The confirm_thermo_state/text_reader.py's main function uses the imageFetcher object to get the images from the files, imageEncoder to crop the image and read the text with the textReader object: 
+
+
+![image](https://github.com/user-attachments/assets/10e5f8f5-91ad-4659-af7c-cecf9fdea66a)
+
+
 
 
 
@@ -101,7 +112,7 @@ However, these settings degrade the image quality. To enhance the image quality,
 
 Google OCR API's sends a list called texts. The first element is all the words on the screen. The second element is the first word and the third is the second word. We take only the second element, which is the number without it's units. In the picture above, it would be "20". 
 
-To take a picture and read it's content, you must run /confirm_thermo_input/main.py. This code will take 3 pictures and adjsut the camera's settings with the RealsenseCamera object, crops and rotates the image with ImageEncoder, and read the text with textReader: 
+To take a picture and read it's content, you must run /confirm_thermo_input/main.py. This code will take 3 pictures and adjsut the camera's settings with the RealsenseCamera object, crop and rotate the image with ImageEncoder, and read the text with textReader: 
 
 
 ![image](https://github.com/user-attachments/assets/fb531de8-2c0a-4509-88d7-96fc588496d6)
