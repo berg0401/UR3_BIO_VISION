@@ -40,16 +40,16 @@ You must put the robot's joints in this configuration to have the right agar rel
 ## Second Mandate: Monitor Thermo-Cycler's State
 The robot interacts with the Thermo-Cycler’s touch screen using a custom pen. To confirm that the contact has been made and the Thermo-Cycler is in the correct state, the robot’s camera captures an image of the screen.
 
-# Screen States
+### Screen States
 There are 23 relevant screen states for the robot protocols: 10 "pop-ups" and 13 menus. "Pop-ups" can appear from any menu.
 
-# Pop-ups: 
+Pop-ups: 
 ![09_Color](https://github.com/user-attachments/assets/366c30f4-5b91-4582-8e5a-02e54562b334)
 
-# Menus: 
+Menus: 
 ![01_Color](https://github.com/user-attachments/assets/c8bd3f15-a46f-4c48-a352-b1033764b88d)
 
-# Recognizing "Pop-ups" and Menus
+Recognizing "Pop-ups" and Menus
 Google’s OCR API reads the labels on the screen to identify different "pop-ups" and menus. Labels are referred to as "features" in the code. A feature is considered part of a menu if it is unique to that menu and helps in identifying it. Features are defined by the text they spell and their location on the screen.
 
 Example of Features: The features of the "Saved Protocols" menu are circled in red: 
@@ -58,7 +58,7 @@ Example of Features: The features of the "Saved Protocols" menu are circled in r
 The effect of light bulbs on the image can be reduced by adjusting the camera’s settings (with very low exposure and gain): 
 ![image](https://github.com/user-attachments/assets/4ddd4864-b02d-4b05-a432-ca2a3b8c3a31)
 
-# Image Processing Steps
+### Image Processing Steps
 Crop the image.
 Detect and read labels.
 Compare the labels to the features of each screen.
@@ -70,7 +70,7 @@ By initializing "pop-ups" first, their features are analyzed before menu feature
 
 Some menus have identical labels because they imply the same reaction from the robot. For example, the edit protocol and new protocol menus are both labeled "edit protocol," and warning pop-ups are labeled "warning pop-up" regardless of their specific content.
 
-# Running the Code
+### Running the Code
 To capture and read an image, run /confirm_thermo_state/main.py. This script will:
 
 Capture one image and adjust the camera’s settings using the RealsenseCamera object.
@@ -79,11 +79,11 @@ Read the text with TextReader.
 
 ![image](https://github.com/user-attachments/assets/bedcd068-4e7a-493a-95ff-0202dc023dcf)
 
-# Robot and Thermo-Cycler Positioning
+### Robot and Thermo-Cycler Positioning
 Robot Position: 
 ![2eede12c-e630-4fb2-b05b-6d156681a3e5](https://github.com/user-attachments/assets/67d59a41-67d7-439d-969a-a02e02fc1d4b)
 
-# Thermo-Cycler Position: 
+### Thermo-Cycler Position: 
 ![image](https://github.com/user-attachments/assets/5d7248ca-8cba-486c-9e7f-36fcaeae59ca)
 
 Pre-captured images can be found in the /state_menu_demo_images directory. The confirm_thermo_state/text_reader.py file’s main function uses the ImageFetcher object to get images from files, ImageEncoder to crop the image, and TextReader to read the text.
@@ -95,10 +95,10 @@ You must build your own JSON authentication key for Google OCR and paste it into
 ## Third Mandate: Confirm Thermo-Cycler's Input
 Sometimes, the Thermo-Cycler may not detect the pen touch on its screen. To verify that the correct button was pressed, a picture is taken of the area where the keyboard’s input is displayed. Google OCR’s API verifies that the result matches the intended input.
 
-# Handling White Spots
+### Handling White Spots
 If a white spot appears in the keyboard’s display section: ![01_Color](https://github.com/user-attachments/assets/b03116d7-88cb-4e52-824b-402c2822c033), it may hinder input confirmation.
 
-# Solution
+### Solution
 Adjust the camera settings to reduce the white spot effect: 
 ![01_Color](https://github.com/user-attachments/assets/9fb7094a-e533-4fc5-b7c6-5f0484a28e9c)
 Settings: 
@@ -109,7 +109,7 @@ However, these settings may degrade image quality. To improve quality, take thre
 
 The Google OCR API returns a list called texts. The first element contains all words on the screen. The second element is the first word, and the third is the second word. Use the second element, which represents the number without units. For example, the picture above would show "20".
 
-# Running the Code
+### Running the Code
 To capture and read an image, run /confirm_thermo_input/main.py. This script will:
 
 Capture three images and adjust the camera’s settings using the RealsenseCamera object.
@@ -118,7 +118,7 @@ Read the text using TextReader.
 
 ![image](https://github.com/user-attachments/assets/fb531de8-2c0a-4509-88d7-96fc588496d6)
 
-# Accurate Positioning
+### Accurate Positioning
 Robot Position: 
 ![image](https://github.com/user-attachments/assets/572dc027-8cdc-442a-a800-3fd067dd5f9e)
 
@@ -128,22 +128,3 @@ Thermo-Cycler Position:
 Pre-captured images can be found in the /input_thermo_demo_images directory. The confirm_thermo_input/text_reader.py file’s main function uses the ImageFetcher object to get images from files, ImageEncoder to crop and rotate the image, and TextReader to read the text.
 
 ![image](https://github.com/user-attachments/assets/10e5f8f5-91ad-4659-af7c-cecf9fdea66a)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
