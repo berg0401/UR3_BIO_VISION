@@ -68,6 +68,8 @@ The confirm_thermo_state/thermo_state_initializer.py file contains the ThermoSta
 By initializing them first, their features are analyzed first by the algorithm. If no labels match the features of the "pop up," we can conclude that it is indeed a menu. It's therefore mandatory to maintain this order when initializing the menus:
 ![image](https://github.com/user-attachments/assets/757981f3-bd53-4488-9af7-ee3ecd901138)
 
+Some menus are labled identically because they imply the same reaction from the robot. The edit protocol and the new protocol menu are labled "edit protocol" per example. The warnings pop up are all under the label "warning pop up", independently of their signification. 
+
 To take a picture and read it's content, you must run /confirm_thermo_state/main.py. This code will take one picture and adjsut the camera's settings with the RealsenseCamera object, crop the image with ImageEncoder, and read the text with textReader: 
 
 ![image](https://github.com/user-attachments/assets/bedcd068-4e7a-493a-95ff-0202dc023dcf)
