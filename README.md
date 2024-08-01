@@ -83,7 +83,7 @@ Read the text with TextReader.
 Robot Position: 
 ![2eede12c-e630-4fb2-b05b-6d156681a3e5](https://github.com/user-attachments/assets/67d59a41-67d7-439d-969a-a02e02fc1d4b)
 
-### Thermo-Cycler Position: 
+Thermo-Cycler Position: 
 ![image](https://github.com/user-attachments/assets/5d7248ca-8cba-486c-9e7f-36fcaeae59ca)
 
 Pre-captured images can be found in the /state_menu_demo_images directory. The confirm_thermo_state/text_reader.py file’s main function uses the ImageFetcher object to get images from files, ImageEncoder to crop the image, and TextReader to read the text.
