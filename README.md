@@ -101,16 +101,24 @@ However, these settings degrade the image quality. To enhance the image quality,
 Google OCR API's sends a list called texts. The first element is all the words on the screen. The second element is the first word and the third is the second word. We take only the second element, which is the number without it's units. In the picture above, it would be "20". 
 
 To take a picture and read it's content, you must run /confirm_thermo_input/main.py. This code will take 3 pictures and adjsut the camera's settings with the RealsenseCamera object, crops and rotates the image with ImageEncoder, and read the text with textReader: 
+
+
 ![image](https://github.com/user-attachments/assets/fb531de8-2c0a-4509-88d7-96fc588496d6)
 
 To have an accurate result, the robot must be placed at this position:
+
+
 ![image](https://github.com/user-attachments/assets/572dc027-8cdc-442a-a800-3fd067dd5f9e)
 
 
 The thermocycler must be at this position: 
+
+
 ![image](https://github.com/user-attachments/assets/5d7248ca-8cba-486c-9e7f-36fcaeae59ca)
 
 It's possible to read pre-captured image from the /input_thermo_demo_images directory. The confirm_thermo_input/text_reader.py's main function uses the imageFetcher object to get the images from the files, imageEncoder to crop and rotate the image and read the text with the textReader object: 
+
+
 ![image](https://github.com/user-attachments/assets/10e5f8f5-91ad-4659-af7c-cecf9fdea66a)
 
 
