@@ -91,14 +91,24 @@ Agar is a gelatinous substance housed in a petri dish. Its height is crucial for
 Due to its transparency, a laser cannot be used. Instead, the height is measured in 2D using the camera with images such as: 
 ![02_Color](https://github.com/user-attachments/assets/f3fc2345-9824-4a15-b59f-a3eac00a7763)
 
+Pictures are taken with the "RealsenseCamera" object from the petri_height_evaluator/realsense_camera.py file. It creates the steams and optiimize the color sensor options for the recognition of the agar. Before closing the program, RealsenseCamera stops the stream, which is important to prevent connexion problems on the following attemps. 
+
 Image processing involves cropping, applying an HSV filter using the OpenCV library, and subsequently applying a median filter to isolate the agar. The red color channel is retained, as it yielded optimal results with our LED strip:
 ![1](https://github.com/user-attachments/assets/66e0e830-c629-47bc-9b0d-919d3d83e3c6)
 
-Contours are identified using the find contours function to detect rectangles and determine their height: 
+Contours are identified using the find contours function to detect rectangles and determine their coordinates: 
 ![1](https://github.com/user-attachments/assets/98ea9e5f-c3cf-415e-9150-2b81e63f4e4e)
 
-Using the agar's height in pixels, along with the camera's focal length, pixel size on the sensor, and the distance from the petri dish to the camera, the theorem of similar triangles is applied to calculate the agar's height in millimeters: 
+The find contours function returns the coordinates of the bottom left corner of the rectangle. The top of the rectangle, where the liquid will be poured, can be found by adding the height of the rectangle to the "y" coordinate of the bottom left corner of the rectangle. 
+
+The HeightEvaluator object also gets the camera's intrinsics parameters like the focal distance of the sensor from the camera's len and the true center point of the image. These parameters are used to find the top of the agar's distance from the center of the camera in meters by applying the similar traingles theorme : 
 ![image](https://github.com/user-attachments/assets/a32d2000-4d1f-4632-879e-24bdc8946d52)
+
+
+*************it is possible to find its distance in pixel from the bottom of the petri pot. The bottom of the petri pot never moves if the same robot position is kept. Its coordinates from the center in pixel are then hardcoded in the bottom_offset attribute of the HeightEvaluator object from the petri_height_evaluator/height_evaluator.py file. *********
+
+Using the agar's height in pixels, along with the camera's focal length, pixel size on the sensor, and the distance from the petri dish to the camera, the theorem of similar triangles is applied to calculate the agar's height in millimeters: 
+
 
 
 The complete pipeline is located in the petry_height_evaluator directory:
