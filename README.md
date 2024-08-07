@@ -94,15 +94,20 @@ Due to its transparency, a laser cannot be used. Instead, the height is measured
 Pictures are taken with the "RealsenseCamera" object from the petri_height_evaluator/realsense_camera.py file. It creates the steams and optiimize the color sensor options for the recognition of the agar. Before closing the program, RealsenseCamera stops the stream, which is important to prevent connexion problems on the following attemps. 
 
 Image processing involves cropping, applying an HSV filter using the OpenCV library, and subsequently applying a median filter to isolate the agar. The red color channel is retained, as it yielded optimal results with our LED strip:
-![1](https://github.com/user-attachments/assets/66e0e830-c629-47bc-9b0d-919d3d83e3c6)
+![image](https://github.com/user-attachments/assets/9642537d-f144-410c-8b0c-e93b1ae8d803)
+
 
 Contours are identified using the find contours function to detect rectangles and determine their coordinates: 
-![1](https://github.com/user-attachments/assets/98ea9e5f-c3cf-415e-9150-2b81e63f4e4e)
+![image](https://github.com/user-attachments/assets/61c05936-4647-445c-9e82-b8758f3c5d1a)
+
 
 The find contours function returns the coordinates of the bottom left corner of the rectangle. The top of the rectangle, where the liquid will be poured, can be found by adding the height of the rectangle to the "y" coordinate of the bottom left corner of the rectangle. 
 
 The HeightEvaluator object also gets the camera's intrinsics parameters like the focal distance of the sensor from the camera's len and the true center point of the image. These parameters are used to find the top of the agar's distance from the center of the camera in meters by applying the similar traingles theorme : 
 ![image](https://github.com/user-attachments/assets/a32d2000-4d1f-4632-879e-24bdc8946d52)
+
+
+![image](https://github.com/user-attachments/assets/8f44b935-95ee-494a-b7c0-3e92cbcf4860)
 
 
 *************it is possible to find its distance in pixel from the bottom of the petri pot. The bottom of the petri pot never moves if the same robot position is kept. Its coordinates from the center in pixel are then hardcoded in the bottom_offset attribute of the HeightEvaluator object from the petri_height_evaluator/height_evaluator.py file. *********
