@@ -1,51 +1,42 @@
-from os import path, listdir, makedirs
+from os import path, makedirs
 import cv2
 from copy import deepcopy
-from crop_auto import CropAuto
+from image_cropper import ImageCropper
+from image_fetcher import ImageFetcher
 from HSV_filter import HSVFilter
-
+import random
 
 
 class FindRectangles:
-    def __init__(self,images,filtered_images):
-        self.filtered_images = filtered_images
-        self.images = images
-        self.good_images = []
-        self.rectangles_size = []
-        self.rectangles_size_show = []
+    def __init__(self):
+        pass
 
 
-    def find(self):
-        for image_index in range(len(self.filtered_images)):
-            horiz_crop = round((self.images[image_index].shape[1] - self.filtered_images[image_index].shape[1])/2)
-            vert_crop = round((self.images[image_index].shape[0] - self.filtered_images[image_index].shape[0])/2)
-            gray = cv2.cvtColor(self.filtered_images[image_index], cv2.COLOR_BGR2GRAY)
-            edges = cv2.Canny(gray, 50, 150)
-            contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            possible_rectangles = []
-            self.find_possible_rectangles(contours, possible_rectangles)
-            if len(possible_rectangles) >> 0:
-                self.good_images.append(self.images[image_index])
-                biggest_rectangle = self.get_biggest_rectangle(possible_rectangles)
-                x, y, w, h = cv2.boundingRect(biggest_rectangle) #top left corner
-                x = x + horiz_crop
-                y = y + vert_crop
-                self.rectangles_size.append([x,y,w,h])
-            else:
-                print("No rectangles found")
-        return self.rectangles_size
+    def find(self,image,filtered_image):
+        horiz_crop = round((image.shape[1] - filtered_image.shape[1])/2)
+        vert_crop = round((image.shape[0] - filtered_image.shape[0])/2)
+        gray = cv2.cvtColor(filtered_image, cv2.COLOR_BGR2GRAY)
+        edges = cv2.Canny(gray, 50, 150)
+        contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        possible_rectangles = []
+        self.find_possible_rectangles(contours, possible_rectangles)
+        if len(possible_rectangles) >> 0:
+            biggest_rectangle = self.get_biggest_rectangle(possible_rectangles)
+            x, y, w, h = cv2.boundingRect(biggest_rectangle)
+            x = x + horiz_crop
+            y = y + vert_crop
+            return [x,y,w,h]
+        else :
+            return None
 
-    def show_images(self):
-        images_copy = deepcopy(self.good_images)
-        for image_index in range(len(self.good_images)):
-            x = self.rectangles_size[image_index][0]
-            y = self.rectangles_size[image_index][1]
-            w = self.rectangles_size[image_index][2]
-            h = self.rectangles_size[image_index][3]
-            cv2.rectangle(images_copy[image_index], (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.imshow('Rectangles Detected', images_copy[image_index])
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+    def show_image(self, image, rectangle_coord):
+        image_copy = deepcopy(image)
+        x, y, w, h = rectangle_coord
+        cv2.rectangle(image_copy, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.imshow('Rectangles Detected', image_copy)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
     def find_possible_rectangles(self,contours,possible_rectangles):
         for contour in contours:
             epsilon = 0.04 * cv2.arcLength(contour, True)
@@ -64,40 +55,37 @@ class FindRectangles:
                 biggest_rectangle = rectangle
         return biggest_rectangle
 
-    def save_images(self,folder):
-        images_copy = deepcopy(self.good_images)
-        for image_index in range(len(self.good_images)):
-            x = self.rectangles_size[image_index][0]
-            y = self.rectangles_size[image_index][1]
-            w = self.rectangles_size[image_index][2]
-            h = self.rectangles_size[image_index][3]
-            cv2.rectangle(images_copy[image_index], (x, y), (x + w, y + h), (0, 255, 0), 2)
-            self.save_image(images_copy[image_index],image_index,folder)
-
-    def save_image(self,image,image_name,folder):
+    def save_image(self, image, rectangle_coord, folder):
+        image_copy = deepcopy(image)
+        x, y, w, h = rectangle_coord
+        cv2.rectangle(image_copy, (x, y), (x + w, y + h), (0, 255, 0), 2)
         rectangle_folder = path.join(folder, 'rectangle')
         # Create the 'rectangle' folder if it doesn't exist
         if not path.exists(rectangle_folder):
             makedirs(rectangle_folder)
-        img_path = path.join(rectangle_folder, f"{image_name}.png")
-        cv2.imwrite(img_path, image)
+        img_path = path.join(rectangle_folder, f"{random.randint(0, 100)}.png")
+        cv2.imwrite(img_path, image_copy)
+
 
 if __name__ == "__main__":
     script_dir = path.dirname(path.abspath(__file__))
-    images_folder = path.join(script_dir, r"..\images_petri")
-    images = []
-    images_name = [f for f in listdir(images_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp'))]
-    for image_name in images_name:
-        img_path = path.join(images_folder, image_name)
-        image = cv2.imread(img_path)
-        images.append(image)
-    top_bottom = 250
-    left_right = 350
-    cropper = CropAuto(images, top_bottom, left_right)
-    cropped_images = cropper.crop()
-    hsv_filter = HSVFilter(cropped_images, 275)
-    filtered_images = hsv_filter.filter()
-    app = FindRectangles(images,filtered_images)
-    rectangles_size = app.find()
-    app.show_images()
-    #app.save_images(images_folder)
+    images_folder = path.join(script_dir, r"..\agar_height_evaluator_demo_images")
+    top_bottom = 380
+    left_right = 600
+    image_fetcher = ImageFetcher(images_folder)
+    images = image_fetcher.fetch()
+    cropper = ImageCropper(top_bottom, left_right)
+    hsv_filter = HSVFilter(virtual_aperture=320)
+    rectangle_finder = FindRectangles()
+    for image in images:
+        cropped_image = cropper.crop(image)
+        filtered_image = hsv_filter.filter(cropped_image)
+        rectangle_coord = rectangle_finder.find(image, filtered_image)
+        if rectangle_coord != None:
+            rectangle_finder.show_image(image, rectangle_coord)
+            # rectangle_finder.save_image(image, rectangle_coord,images_folder)
+        else:
+            print("\nCan't detect the agar\n")
+
+
+

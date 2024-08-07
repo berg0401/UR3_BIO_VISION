@@ -1,7 +1,8 @@
-from os import path, makedirs, listdir
+from os import path, makedirs
 import cv2
 import copy
-from crop_auto import CropAuto
+from image_cropper import ImageCropper
+from image_fetcher import ImageFetcher
 
 
 class BGRFilter:
@@ -49,18 +50,14 @@ class BGRFilter:
 
 if __name__ == "__main__":
     script_dir = path.dirname(path.abspath(__file__))
-    images_folder = path.join(script_dir, r"..\images_petri")
-    images = []
-    images_name = [f for f in listdir(images_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp'))]
-    for image_name in images_name:
-        img_path = path.join(images_folder, image_name)
-        image = cv2.imread(img_path)
-        images.append(image)
+    images_folder = path.join(script_dir, r"..\agar_height_evaluator_demo_images")
+    image_fetcher = ImageFetcher(images_folder)
+    images = image_fetcher.fetch()
     top_bottom = 250
     left_right = 350
-    app = CropAuto(images, top_bottom, left_right)
+    app = ImageCropper(images, top_bottom, left_right)
     cropped_images = app.crop()
     app = BGRFilter(cropped_images,250)
     filtered_images = app.filter()
     app.show_images()
-    app.save_images(images_folder)
+    #app.save_images(images_folder)

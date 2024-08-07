@@ -36,8 +36,9 @@ class RealsenseCamera():
         self.color_sensor = sensors[1]
         self.set_options()
 
-    def stop_pipeline(self):
+    def __del__(self):
         self.pipeline.stop()
+
     def set_option(self, option_name):
         # Get the option constant from the map
         value = self.options_value[option_name]

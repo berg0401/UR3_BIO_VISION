@@ -9,13 +9,13 @@ class RealsenseCamera():
         self.config = rs.config()
         self.config.enable_stream(rs.stream.color, 1920, 1080, rs.format.bgr8, 30)
         self.pipeline.start(self.config)
-        self.options_value = {'Exposure': 78.0,
-                               'Gain': 0.0,
+        self.options_value = {'Exposure': 156.0,
+                               'Gain': 64.0,
                                'Brightness': 0.0,
-                               'Contrast': 49.0,
+                               'Contrast': 50.0,
                                'Gamma': 300.0,
                                'Hue': 0.0,
-                               'Saturation': 64.0,
+                               'Saturation': 70.0,
                                'Sharpness': 50.0,
                                'Enable Auto White Balance': 1.0,
                                'Enable Auto Exposure': 0.0}
@@ -60,7 +60,7 @@ class RealsenseCamera():
         frames = self.pipeline.wait_for_frames()
         color_frame = frames.get_color_frame()
         color_image = np.asanyarray(color_frame.get_data())
-        return [color_image]
+        return color_image
 
     def show_image(self, images):
         for image in images:

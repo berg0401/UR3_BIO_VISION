@@ -9,7 +9,7 @@ class TextReader:
     def __init__(self):
         #connect to API with json key
         script_dir = path.dirname(path.abspath(__file__))
-        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../path_to_your_key")
+        environ['GOOGLE_APPLICATION_CREDENTIALS'] = path.join(script_dir, r"../path_to_your_json_key")
         self.client = vision.ImageAnnotatorClient()
 
     def read(self,image_content):
