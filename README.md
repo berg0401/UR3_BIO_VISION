@@ -89,7 +89,7 @@ Agar is a gelatinous substance housed in a petri dish. Its height is crucial for
 ![image](https://github.com/user-attachments/assets/8b9cffc1-c88d-49f4-a73a-65201d8a1840)
 
 Due to its transparency, a laser cannot be used. Instead, the height is measured in 2D using the camera with images such as: 
-![02_Color](https://github.com/user-attachments/assets/f3fc2345-9824-4a15-b59f-a3eac00a7763)
+![ex1_Color](https://github.com/user-attachments/assets/94541e0a-7485-4d47-8628-9e07aebf9b25)
 
 Pictures are taken with the "RealsenseCamera" object from the petri_height_evaluator/realsense_camera.py file. It creates the steams and optiimize the color sensor options for the recognition of the agar. Before closing the program, RealsenseCamera stops the stream, which is important to prevent connexion problems on the following attemps. 
 
