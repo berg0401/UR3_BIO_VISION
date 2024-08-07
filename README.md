@@ -103,7 +103,7 @@ Contours are identified using the find_contours function from open_cv to detect 
 
 The find_contours function returns the coordinates of the bottom left corner of the rectangle. The top of the rectangle, where the liquid will be poured, can be found by adding the height of the rectangle to the "y" coordinate of the bottom left corner of the rectangle. 
 
-The HeightEvaluator object also gets the camera's intrinsics parameters like the focal distance of the sensor from the camera's len and the true center point of the image. These parameters are used to find the top of the agar from the center of the camera (metric distance) by applying the similar triangles theorem : 
+The HeightEvaluator object also gets the camera's intrinsics parameters like the focal distance of the sensor from the camera's len and the true center point of the image. With this function, you can see that the image is considered to have zero distortion since its distortion coefficients are equal to 0. These parameters are also used to find the top of the agar from the center of the camera (metric distance) by applying the similar triangles theorem : 
 ![image](https://github.com/user-attachments/assets/650f2379-3a5b-448c-95cb-b1c4a9313a15)
 
 It is more convenient to know the top of the agar from the bottom of the petri pot. The bottom never moves if the same robot position is kept. Its coordinates in pixel are then hardcoded in the bottom_petri_absolute_position attribute of the HeightEvaluator object from the petri_height_evaluator/height_evaluator.py file. The similar triangles theorem is applied again to get the distance between the center of the image and the bottom of the petri pot : 
