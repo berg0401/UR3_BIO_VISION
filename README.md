@@ -132,7 +132,9 @@ They are set automatically in the RealsenseCamera object if you run the main scr
 
 ### No camera
 
-If you don't have access to a camera, you can use the demo pictures in the /agar_height_evaluator_demo_images directory with by running the /petri_height_evaluator/height_evaluator.py script. Instead of triggering with the RealsenseCamera object, it uses the ImageFetcher object : 
+If you don't have access to a camera, you can use the demo pictures in the /agar_height_evaluator_demo_images directory with by running the /petri_height_evaluator/height_evaluator.py script. Instead of triggering with the RealsenseCamera object, it uses the ImageFetcher object :
+
+
 ![image](https://github.com/user-attachments/assets/6beddcf6-661b-4f98-ad88-543152d6cf67)
 
 
@@ -141,7 +143,15 @@ The algorithm works perfectly, but even the human eye can't see the actual heigh
 
 ![image](https://github.com/user-attachments/assets/2c661455-36b1-4e2c-954a-4e6e4e00b7df)
 
-The drop of a 5 microliter substance has a diameter of about 2 mm. Since it's not ideal to touch the agar, we keep a half a millimeter distance between the substance and the tip of the tool when we drop the liquid on it. On this demo, an offset of 1 mm was substracted to the result of the alogrithm : 
+The drop of a 5 microliter substance has a diameter of about 2 mm. Since it's not ideal to touch the agar, we keep a 0.5 mm distance between the substance and the tip of the tool when we drop the liquid on it:
+
+![image](https://github.com/user-attachments/assets/c64a3d81-d2f3-4607-99ec-36c3ede51c94)
+
+
+On this demo, an offset of 1 mm was substracted to the result of the alogrithm to get the result in the previous image: 
+
+[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=xPeLk151vLE)
+
 
 
 
