@@ -83,6 +83,7 @@ This will download automatically the key. Paste it in your project's directory a
 
   
 ## First Mandate : Measure the Agar
+### Mandate Description
 Agar is a gelatinous substance housed in a petri dish. Its height is crucial for accurately placing a liquid drop on its surface. Penetration into the substance is limited to 1 mm, ensuring the liquid touches the surface due to insufficient gravitational force.
 
 ![image](https://github.com/user-attachments/assets/38a13972-4aff-47c5-a880-240bdbb4fcb7)
@@ -91,7 +92,8 @@ Agar is a gelatinous substance housed in a petri dish. Its height is crucial for
 Due to its transparency, a laser cannot be used. Instead, the height is measured in 2D using the camera with images such as: 
 ![ex1_Color](https://github.com/user-attachments/assets/94541e0a-7485-4d47-8628-9e07aebf9b25)
 
-Pictures are taken with the "RealsenseCamera" object from the petri_height_evaluator/realsense_camera.py file. It creates the steams and optiimize the color sensor options for the recognition of the agar. Before closing the program, RealsenseCamera stops the stream, which is important to prevent connexion problems on the following attemps. 
+### Pipeline
+Pictures are taken with the "RealsenseCamera" object from the petri_height_evaluator/realsense_camera.py file. It creates the stream and optiimize the color sensor options for the recognition of the agar. Before closing the program, RealsenseCamera stops the stream, which is important to prevent connexion problems on the following attemps. 
 
 Image processing involves cropping, applying an HSV filter using the OpenCV library, and subsequently applying a median filter to isolate the agar. The red color channel is retained, as it yielded optimal results with our LED strip:
 ![image](https://github.com/user-attachments/assets/9642537d-f144-410c-8b0c-e93b1ae8d803)
@@ -116,7 +118,7 @@ With the measure between the center of the image and the top of the agar and wit
 To take a picture and process the image, you must run the /petri_height_evaluator/main.py script:
 ![image](https://github.com/user-attachments/assets/94c3a87d-8def-476c-9b49-712a364986d8)
 
-
+### Robot position and camera settings
 For ideal results with the virtual aperture, it is recommended to take a 1920x1080 pixel picture. If you change the picture's resolution, change the crop and the virtual aperture values accordingly. They are now ideal with a 1980x1080 pixel image.
 
 You must put the robot's joints in this configuration to have the right petri relative position to the camera and apply the theorem of similar triangles:
@@ -126,13 +128,20 @@ You must put the robot's joints in this configuration to have the right petri re
 The settings on the camera are : 
 ![image](https://github.com/user-attachments/assets/720970c8-33c8-47a6-94f4-2b2b1b882e68)
 
-They are set automatically in the RealsenseCamera object. 
+They are set automatically in the RealsenseCamera object if you run the main script.
 
 ### No camera
 
 If you don't have access to a camera, you can use the demo pictures in the /agar_height_evaluator_demo_images directory with by running the /petri_height_evaluator/height_evaluator.py script. Instead of triggering with the RealsenseCamera object, it uses the ImageFetcher object : 
 ![image](https://github.com/user-attachments/assets/6beddcf6-661b-4f98-ad88-543152d6cf67)
 
+
+### Results
+The algorithm works perfectly, but even the human eye can't see the actual height of the agar from the side due to the surface tension. The robot must offset its position of 1.5mm to touch the surface of the agar. 
+
+![image](https://github.com/user-attachments/assets/2c661455-36b1-4e2c-954a-4e6e4e00b7df)
+
+The drop of a 5 microliter substance has a diameter of about 2 mm. Since it's not ideal to touch the agar, we keep a half a millimeter distance between the substance and the tip of the tool when we drop the liquid on it. On this demo, an offset of 1 mm was substracted to the result of the alogrithm : 
 
 
 
