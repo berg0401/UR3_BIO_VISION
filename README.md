@@ -83,32 +83,76 @@ This will download automatically the key. Paste it in your project's directory a
 
   
 ## First Mandate : Measure the Agar
+### Mandate Description
 Agar is a gelatinous substance housed in a petri dish. Its height is crucial for accurately placing a liquid drop on its surface. Penetration into the substance is limited to 1 mm, ensuring the liquid touches the surface due to insufficient gravitational force.
 
 ![image](https://github.com/user-attachments/assets/38a13972-4aff-47c5-a880-240bdbb4fcb7)
 ![image](https://github.com/user-attachments/assets/8b9cffc1-c88d-49f4-a73a-65201d8a1840)
 
 Due to its transparency, a laser cannot be used. Instead, the height is measured in 2D using the camera with images such as: 
-![02_Color](https://github.com/user-attachments/assets/f3fc2345-9824-4a15-b59f-a3eac00a7763)
+![ex1_Color](https://github.com/user-attachments/assets/94541e0a-7485-4d47-8628-9e07aebf9b25)
+
+### Pipeline
+Pictures are taken with the "RealsenseCamera" object from the petri_height_evaluator/realsense_camera.py file. It creates the stream and optiimize the color sensor options for the recognition of the agar. Before closing the program, RealsenseCamera stops the stream, which is important to prevent connexion problems on the following attemps. 
 
 Image processing involves cropping, applying an HSV filter using the OpenCV library, and subsequently applying a median filter to isolate the agar. The red color channel is retained, as it yielded optimal results with our LED strip:
-![1](https://github.com/user-attachments/assets/66e0e830-c629-47bc-9b0d-919d3d83e3c6)
-
-Contours are identified using the find contours function to detect rectangles and determine their height: 
-![1](https://github.com/user-attachments/assets/98ea9e5f-c3cf-415e-9150-2b81e63f4e4e)
-
-Using the agar's height in pixels, along with the camera's focal length, pixel size on the sensor, and the distance from the petri dish to the camera, the theorem of similar triangles is applied to calculate the agar's height in millimeters: 
-![image](https://github.com/user-attachments/assets/a32d2000-4d1f-4632-879e-24bdc8946d52)
+![image](https://github.com/user-attachments/assets/9642537d-f144-410c-8b0c-e93b1ae8d803)
 
 
-The complete pipeline is located in the petry_height_evaluator directory:
-![image](https://github.com/user-attachments/assets/0514e946-ee79-4963-a3ab-62319d3ac08c)
+Contours are identified using the find_contours function from open_cv to detect rectangles and determine their coordinates: 
+![image](https://github.com/user-attachments/assets/61c05936-4647-445c-9e82-b8758f3c5d1a)
 
-For ideal results with the virtual aperture, it is recommended to take a 1280x720 pixel picture. If you change the picture's resolution, change the crop and the virtual aperture values accordingly. They are now ideal with a 1280x720 pixel image.
 
-You must put the robot's joints in this configuration to have the right agar relative position to the camera and apply the theorem of similar triangles:
+The find_contours function returns the coordinates of the bottom left corner of the rectangle. The top of the rectangle, where the liquid will be poured, can be found by adding the height of the rectangle to the "y" coordinate of the bottom left corner of the rectangle. 
 
-![image](https://github.com/user-attachments/assets/df5eec7c-8405-4cfc-a026-937516794b50)
+The HeightEvaluator object also gets the camera's intrinsics parameters like the focal distance of the sensor from the camera's len and the true center point of the image. With this function, you can see that the image is considered to have zero distortion since its distortion coefficients are equal to 0. These parameters are also used to find the top of the agar from the center of the camera (metric distance) by applying the similar triangles theorem : 
+![image](https://github.com/user-attachments/assets/650f2379-3a5b-448c-95cb-b1c4a9313a15)
+
+It is more convenient to know the top of the agar from the bottom of the petri pot. The bottom never moves if the same robot position is kept. Its coordinates in pixel are then hardcoded in the bottom_petri_absolute_position attribute of the HeightEvaluator object from the petri_height_evaluator/height_evaluator.py file. The similar triangles theorem is applied again to get the distance between the center of the image and the bottom of the petri pot : 
+![image](https://github.com/user-attachments/assets/02036149-831a-4cc3-bb63-b2d62b7a8fee)
+
+With the measure between the center of the image and the top of the agar and with the measure between the center of the image and the bottom of the petri_pot, the distance between the bottom of the petri pot and the top of the agar can be easily calculated with a substraction: 
+![image](https://github.com/user-attachments/assets/8f44b935-95ee-494a-b7c0-3e92cbcf4860)
+
+
+To take a picture and process the image, you must run the /petri_height_evaluator/main.py script:
+![image](https://github.com/user-attachments/assets/94c3a87d-8def-476c-9b49-712a364986d8)
+
+### Robot position and camera settings
+For ideal results with the virtual aperture, it is recommended to take a 1920x1080 pixel picture. If you change the picture's resolution, change the crop and the virtual aperture values accordingly. They are now ideal with a 1980x1080 pixel image.
+
+You must put the robot's joints in this configuration to have the right petri relative position to the camera and apply the theorem of similar triangles:
+
+![image](https://github.com/user-attachments/assets/66f47f11-2a5a-4023-ad63-27cd76ed6474)
+
+The settings on the camera are : 
+![image](https://github.com/user-attachments/assets/720970c8-33c8-47a6-94f4-2b2b1b882e68)
+
+They are set automatically in the RealsenseCamera object if you run the main script.
+
+### No camera
+
+If you don't have access to a camera, you can use the demo pictures in the /agar_height_evaluator_demo_images directory with by running the /petri_height_evaluator/height_evaluator.py script. Instead of triggering with the RealsenseCamera object, it uses the ImageFetcher object :
+
+
+![image](https://github.com/user-attachments/assets/6beddcf6-661b-4f98-ad88-543152d6cf67)
+
+
+### Results
+The algorithm works perfectly, but even the human eye can't see the actual height of the agar from the side due to the surface tension. The robot must offset its position of 1.5mm to touch the surface of the agar. 
+
+![image](https://github.com/user-attachments/assets/2c661455-36b1-4e2c-954a-4e6e4e00b7df)
+
+The drop of a 5 microliter substance has a diameter of about 2 mm. Since it's not ideal to touch the agar, we keep a 0.5 mm distance between the substance and the tip of the tool when we drop the liquid on it:
+
+![image](https://github.com/user-attachments/assets/c64a3d81-d2f3-4607-99ec-36c3ede51c94)
+
+
+On this demo, an offset of 1 mm was substracted to the result of the alogrithm to get the result in the previous image: 
+
+[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=xPeLk151vLE)
+
+
 
 
 ## Second Mandate: Monitor Thermo-Cycler's State
