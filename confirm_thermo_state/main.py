@@ -7,7 +7,7 @@ from image_encoder import ImageEncoder
 text_reader = TextReader()
 camera = RealsenseCamera()
 while(True):
-    keyboard = input("Press '0' to capture an image, and 'exit' to quit:\n")  # Replace this line with call from robot
+    keyboard = input("Press '0' to capture an image or 'exit' to quit:\n")  # Replace this line with call from robot
     if keyboard == '0':
         images = camera.trigger()
         # camera.show_image(images)
